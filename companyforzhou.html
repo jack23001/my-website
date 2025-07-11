@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智科工程资料管理 - 专业工程资料解决方案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #b3c1cf;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #f8f9fa;
+            --dark: #1a2530;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .logo-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .company-info, .services {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-info::before, .services::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+        }
+        
+        .company-info:hover, .services:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .services {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d4e8f9 100%);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: #444;
+            font-size: 1.05rem;
+        }
+        
+        ul {
+            padding-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+        
+        /* 联系区域 */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .contact-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .contact-card {
+            background: rgba(255,255,255,0.12);
+            padding: 25px;
+            border-radius: 12px;
+            min-width: 250px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .contact-info {
+            font-size: 1.1rem;
+            margin: 8px 0;
+        }
+        
+        .contact-info a {
+            color: #7fd1ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+        
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+        
+        /* 页脚样式 */
+        .footer-wave {
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%232c3e50' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: top;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--dark);
+            color: #ecf0f1;
+            margin-top: -5px;
+        }
+        
+        footer p {
+            margin: 8px 0;
+            color: #bdc3c7;
+            font-size: 0.95rem;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">EDM</div>
+            <h1 class="animated">智科工程资料管理有限公司</h1>
+            <p class="tagline animated delay-1">专业 · 高效 · 可靠的工程资料全周期管理解决方案</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="company-info animated delay-1">
+                <h2><i class="fas fa-building"></i> 公司简介</h2>
+                <p>工程资料管理有限公司成立于2010年，是专注于工程建设项目全周期资料管理的专业服务提供商。我们为建筑、交通、能源等领域的工程项目提供全方位的资料编制、归档和数字化管理解决方案。</p>
+                <p>我们的团队由资深工程资料专家组成，拥有超过15年的行业经验，服务过200+大型工程项目，包括高速公路、商业综合体、工业厂房等各类建设项目。我们严格遵循国家建设工程资料管理规范，确保资料的真实性、完整性和可追溯性。</p>
+                
+                <h2 class="animated delay-2"><i class="fas fa-bullseye"></i> 我们的使命</h2>
+                <p>通过专业化的工程资料管理服务，帮助客户降低项目风险、提高验收通过率、实现资料价值的最大化利用，成为工程建设领域最值得信赖的资料管理合作伙伴。</p>
+            </div>
+            
+            <div class="services animated delay-2">
+                <h2><i class="fas fa-cogs"></i> 核心服务</h2>
+                <ul>
+                    <li>施工过程资料编制与整理</li>
+                    <li>竣工资料归档与验收支持</li>
+                    <li>工程资料数字化与电子归档</li>
+                    <li>BIM技术辅助资料管理</li>
+                    <li>工程资料管理培训与咨询</li>
+                    <li>资料管理流程优化与标准化</li>
+                    <li>工程档案长期保管与检索</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <div class="contact-content">
+                <h2 class="animated"><i class="fas fa-envelope-open-text"></i> 联系我们</h2>
+                <p class="animated delay-1">无论您有任何问题或需求，我们的专业团队随时为您服务</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-card animated delay-1">
+                        <h3><i class="fas fa-phone"></i> 电话咨询</h3>
+                        <p class="contact-info">0517-8888 9999</p>
+                        <p class="contact-info">180-1234-5678</p>
+                    </div>
+                    
+                    <div class="contact-card animated delay-2">
+                        <h3><i class="fas fa-envelope"></i> 电子邮件</h3>
+                        <p class="contact-info">
+                            <a href="mailto:info@engineering-data.com">info@engineering-data.com</a>
+                        </p>
+                        <p class="contact-info">
+                            <a href="mailto:support@engineering-data.com">support@engineering-data.com</a>
+                        </p>
+                    </div>
+                    
+                    <div class="contact-card animated delay-3">
+                        <h3><i class="fas fa-map-marker-alt"></i> 公司地址</h3>
+                        <p class="contact-info">江苏省淮安市</p>
+                        <p class="contact-info">翔宇大道100号创智大厦15层</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-wave"></div>
+    <footer>
+        <p>&copy; 2025 智科工程资料管理有限公司 版权所有</p>
+        <p>苏ICP备12345678号 | 专业工程资料管理服务提供商</p>
+    </footer>
+
+    <script>
+        // 添加滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.visibility = 'visible';
+                        entry.target.classList.add(entry.target.dataset.animation);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.visibility = 'hidden';
+                el.dataset.animation = 'fadeIn';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
